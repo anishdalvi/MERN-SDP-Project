@@ -3,15 +3,17 @@ import NavbarBootstrap from './components/NavbarBootstrap'
 import Login from './components/logreg/Login'
 import Register from './components/logreg/Register'
 import './App.css'
+import Counter from './components/redux-tut/Counter'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <>
       <NavbarBootstrap />
+      <Counter />
       
-      <Login />
       
     </>
   )
