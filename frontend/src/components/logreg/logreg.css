@@ -1,0 +1,38 @@
+.form-control:focus {
+    border-color: #000000 !important;
+    box-shadow: 0 0 5px rgb(0, 0, 0) !important;
+  }
+
+
+.logregForm{
+    width: 500px;
+    display: block;
+    margin: 100px auto;
+}
+
+.bottom-form{
+  
+  margin-top: 40px;
+  
+
+}
+
+.bottom-form span{
+  display: block;
+  margin-top: 20px;
+   
+}
+.bottom-form a{
+  color: white ;
+  padding: 10px;
+}
+.bottom-form a:hover{
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+
+  
+  

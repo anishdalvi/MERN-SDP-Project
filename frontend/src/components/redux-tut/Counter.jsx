@@ -5,7 +5,7 @@ import { incNumber, decNumber } from '../../redux/actions/index'
 
 export default function Counter() {
   const counterState = useSelector((state) => state.changeNumber)
-  console.log(counterState);
+  //console.log(counterState);
   const dispatch = useDispatch()
   return (
     <>
