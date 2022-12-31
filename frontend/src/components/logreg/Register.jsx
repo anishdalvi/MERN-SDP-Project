@@ -1,31 +1,75 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './logreg.css'
 import { Link, NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { register, reset } from '../../redux/features/auth/authSlice'
+import Spinner from '../Spinner';
+
 
 export default function Register() {
-  const [user, setUser] = useState({
-    username:"",
+
+  const [formData, setFormData] = useState({
+    name:"",
     email:"",
     password:""
   })
 
-  const { username, email, password } = user
+  const { name, email, password } = formData
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
+
+
+  useEffect(() => {
+    if(isError){
+      toast.error(message)
+    }
+    if(isSuccess || user){
+      navigate('/')
+    }
+
+    //dispatch(reset())
+  
+    
+  }, [user, isError, isSuccess, message, navigate, dispatch])
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setUser({
-      ...user,
+    setFormData({
+      ...formData,
       [name]: value
     })
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const userData = {
+        name,
+        email,
+        password
+      }
+
+      dispatch(register(userData))
+    
+  }
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
   return (
-    <Form className='logregForm'>
-      {/* {console.log("User", user)} */}
+    <Form className='logregForm' onSubmit={handleSubmit}>
+      {/* {console.log("User Register ::::", user)} */}
       <Form.Group className="mb-3" controlId="formBasicUsername">
         <Form.Label>Username</Form.Label>
-        <Form.Control type="text" placeholder="Enter Username" name="username" onChange={handleChange} value={username} />
+        <Form.Control type="text" placeholder="Enter Name" name="name" onChange={handleChange} value={name} />
         
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
