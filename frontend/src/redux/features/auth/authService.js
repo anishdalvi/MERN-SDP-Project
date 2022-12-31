@@ -9,13 +9,13 @@ const API_URL = '/api/users/'
 const register = async (userData) => {
     const response = await axios.post(API_URL+ 'register', userData)
 
-    console.log("Register Service : ",response.data.data.access_token);
+    console.log("Register Service : ",response.data);
 
     if(response.data){
-        localStorage.setItem('user', JSON.stringify(response.data.data.access_token))
+        localStorage.setItem('user', JSON.stringify(response.data.data))
     }
 
-    return response.data
+    return response.data.data
 
 }
 
@@ -24,10 +24,10 @@ const register = async (userData) => {
 const login = async (userData) => {
     const response = await axios.post(API_URL + 'login', userData)
 
-    console.log("Login Service : ",response.data.access_token);
+    console.log("Login Service : ",response.data);
 
     if(response.data){
-        localStorage.setItem('user', JSON.stringify(response.data.access_token))
+        localStorage.setItem('user', JSON.stringify(response.data))
     }
 
     return response.data
