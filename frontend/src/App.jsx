@@ -8,6 +8,7 @@ import Counter from './components/redux-tut/Counter'
 import Login from './components/logreg/Login'
 import Register from './components/logreg/Register'
 import Home from './components/Home';
+import AddUser from './components/AddUser';
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path='login' element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path='addUser' element={<AddUser />} />
             {/* { user ? (<Route path="home" element={<Home />} />) : (<Route path='login' element={<Login />} />)} */}
           </Route>
       </Routes> 

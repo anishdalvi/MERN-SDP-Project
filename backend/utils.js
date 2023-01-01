@@ -13,8 +13,8 @@ const compare = (text, hash) => {
     return bcrypt.compare(text, hash)
 }
 
-const createAcessToken = (email) => {
-    return jwt.sign({email}, process.env.JWT_SECRET, {
+const createAcessToken = (email, id) => {
+    return jwt.sign({email, id}, process.env.JWT_SECRET, {
        expiresIn:"12h"
     })
 }

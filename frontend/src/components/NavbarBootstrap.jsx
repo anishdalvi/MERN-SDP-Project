@@ -26,12 +26,13 @@ function NavbarBootstrap() {
           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             
               <Container>
-                <Navbar.Brand href="#home">SDP MERN Stack</Navbar.Brand>
+                <Navbar.Brand href="/">SDP MERN Stack</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
 
                   <Nav className="me-auto">
-                   
+                    { user ? (<Nav.Link as={Link} to="/addUser">Add User</Nav.Link>) : (<Nav.Link></Nav.Link>) }
+                    
                     
                   </Nav>
                   <Nav>

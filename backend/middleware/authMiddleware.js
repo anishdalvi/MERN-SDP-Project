@@ -12,7 +12,7 @@ module.exports = ( req, res, next ) => {
         const decoded = jwt.verify(accessToken, process.env.JWT_SECRET)
         
         req.email = decoded.email
-        //req.id = decoded.id
+        req.id = decoded.id
 
         next()
 

@@ -26,7 +26,7 @@ export default function Home() {
 
   } , [user, navigate, dispatch] )
 
-  console.log("Here : ", user);
+  console.log("Here in Home : ", user);
 
   return (
     <div style={{textAlign:"center", marginTop:"100px"}}> <h1>Hello {user && (user.name)} </h1>

@@ -51,7 +51,7 @@ const registerUser = asyncHandler( async (req, res) => {
         
         resData = user.toJSON()
         
-        resData.access_token = createAcessToken(resData.email)
+        resData.access_token = createAcessToken(resData.email. resData.id)
         const { id, name, email, access_token, otp } = resData
         sendMail(email, name, otp)
         //console.log("after resData",resData);
@@ -84,13 +84,13 @@ const loginUser = asyncHandler( async (req, res) => {
 
     // Check for Email
     const user = await User.findOne({email})
-
+    console.log(user.id);
     if (user && (await compare(password, user.password))){
         res.json({
             id: user.id,
             name: user.name,
             email: user.email,
-            access_token: createAcessToken(user.email)
+            access_token: createAcessToken(user.email, user.id)
         })
     } 
     else{
@@ -108,6 +108,7 @@ const loginUser = asyncHandler( async (req, res) => {
 const getProfile = asyncHandler( async (req, res) => {
 
     const user = await User.findOne({email: req.email})
+    console.log(user);
     if (!user){
         res.status(400).json({message:"User not found"})
         throw Error('User not Found')
