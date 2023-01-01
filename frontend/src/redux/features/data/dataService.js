@@ -29,11 +29,28 @@ const getData = async (token) => {
             Authorization: token
         }
     }
-
+    //console.log("Get Data Service", config);
     const response = await axios.get(API_URL, config)
+    console.log("Get Data Service", response.data);
 
     return response.data
 }
+
+
+// update data
+
+const updateData = async (dataId, userListData, token) => {
+    const config = {
+        headers: {
+            Authorization: token
+        }
+    }
+
+    const response = await axios.put(API_URL + dataId, userListData, config)
+    console.log("Update Data Service", response.data);
+    return response.data
+}
+
 
 
 
@@ -47,7 +64,7 @@ const deleteData = async (dataId, token) => {
     }
 
     const response = await axios.delete(API_URL + dataId, config)
-
+    console.log("Delete Data Service", response.data);
     return response.data
 }
 
@@ -58,6 +75,7 @@ const deleteData = async (dataId, token) => {
 const dataService = {
     createData,
     getData,
+    updateData,
     deleteData
 }
 

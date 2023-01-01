@@ -76,7 +76,7 @@ const updateData = asyncHandler( async (req, res) => {
     })
 
     //res.status(200).json([{message:"Goal Updated"}, updatedGoal])
-    res.status(200).json(updatedData)
+    res.status(200).json([{message:"Data Updated"}, updatedData])
 })
 
 

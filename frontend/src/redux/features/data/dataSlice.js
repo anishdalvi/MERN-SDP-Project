@@ -51,6 +51,25 @@ export const getData = createAsyncThunk('data/getAll', async(_, thunkAPI) => {
 })
 
 
+
+// put update data
+
+export const updateData = createAsyncThunk('data/update', async(id, thunkAPI) => {
+    try {
+        if(thunkAPI.getState().auth.user){
+            const token = thunkAPI.getState().auth.user.access_token
+            return await dataService.updateData(id,token)
+        }
+        else{
+            console.log("User Gone during update data")
+        }
+      } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+      }
+})
+
+
 // delete goalGoal
 
 export const deleteData = createAsyncThunk('data/delete', async (id , thunkAPI) => {
@@ -111,6 +130,20 @@ export const dataSlice = createSlice({
                 state.datas = action.payload
             })
             .addCase(getData.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+
+            .addCase(updateData.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(updateData.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.datas.push(action.payload)
+            })
+            .addCase(updateData.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
