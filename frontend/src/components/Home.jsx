@@ -1,8 +1,9 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container';
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { Modal, Button } from 'react-bootstrap';  
 //import { reset } from '../redux/features/auth/authSlice'
 import Table from 'react-bootstrap/Table';
 import Spinner from './Spinner'
@@ -11,6 +12,11 @@ import { getData, deleteData, reset, updateData } from '../redux/features/data/d
 //import List from './List';
 
 export default function Home() {
+
+  const [show, setShow] = useState(false);
+  const modalClose = () => setShow(false);
+  const modalShow = () => setShow(true);  
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { user } = useSelector((state) => state.auth)
@@ -47,6 +53,24 @@ export default function Home() {
   return (
     <div style={{textAlign:"center", marginTop:"100px"}}> <h1>Hello {user && (user.name)} </h1>
       <Container>
+                {/*  Modal Start */}
+                <Modal backdrop="static" show={show} onHide={modalClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Static Backdrop Modal</Modal.Title>
+                  </Modal.Header>
+
+                  <Modal.Body>
+                    <p>This Modal will not close when clicking outside it.</p>
+                  </Modal.Body>
+
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={modalClose}>Close Modal</Button>
+                    <Button variant="primary">Save changes</Button>
+                  </Modal.Footer>
+                </Modal>  
+                
+                {/*  Modal End */}
+
                 <Table striped bordered hover variant='light' >
                     <thead>
                         <tr>
@@ -70,7 +94,7 @@ export default function Home() {
                              <td>{data.email}</td>
                              <td>{data.phone}</td>
                              <td>{data.address}</td>
-                              <td><button onClick={() => navigate('/updateUser')}>Edit</button></td>
+                              <td><button onClick={modalShow}>Edit</button></td>
                               <td><button onClick={() => dispatch(deleteData(data._id)).then(() => navigate('/addUser'))}>Delete</button></td>
                             </tr>
                           ))}
