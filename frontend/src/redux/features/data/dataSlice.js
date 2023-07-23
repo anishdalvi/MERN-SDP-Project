@@ -54,13 +54,12 @@ export const getData = createAsyncThunk('data/getAll', async(_, thunkAPI) => {
 
 // put update data
 
-export const updateData = createAsyncThunk('data/update', async(id, userListData, thunkAPI) => {
+export const updateData = createAsyncThunk('data/update', async (payload, thunkAPI) => {
+    // since we cannot send multiple arguments to createAsynThunk, we create a single object
+    const { id, userListData } = payload;
     try {
         if(thunkAPI.getState().auth.user){
             const token = thunkAPI.getState().auth.user.access_token
-
-            console.log("dataSlice token: " + token);
-            console.log("dataSlice id: " + id);
 
             return await dataService.updateData(id,userListData, token);
         }
@@ -143,9 +142,19 @@ export const dataSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(updateData.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.isSuccess = true
-                state.datas.push(action.payload)
+              state.isLoading = false;
+              state.isSuccess = true;
+              //state.datas.push(action.payload)
+
+              // Find the index of the item to be updated
+              const index = state.datas.findIndex(
+                (data) => data._id === action.payload._id
+              );
+
+              if (index !== -1) {
+                // Replace the old data with the updated data
+                state.datas[index] = action.payload;
+              }
             })
             .addCase(updateData.rejected, (state, action) => {
                 state.isLoading = false

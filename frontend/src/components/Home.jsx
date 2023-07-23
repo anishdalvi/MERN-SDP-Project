@@ -43,7 +43,7 @@ export default function Home() {
       dispatch(reset())
     }
 
-  } , [user, navigate,message, isError ,dispatch] )
+  } , [user, navigate,message, isError ,dispatch, show] )
 
   if (isLoading){
     return <Spinner />

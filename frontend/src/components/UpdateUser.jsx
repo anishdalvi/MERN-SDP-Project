@@ -4,17 +4,17 @@ import Form from 'react-bootstrap/Form';
 import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { updateData } from '../redux/features/data/dataSlice'
+import { updateData, getData } from '../redux/features/data/dataSlice'
 import { toast } from 'react-toastify'
 import Modal from 'react-bootstrap/Modal'
 
 export default function UpdateUser({ show, close, data}) {
 
   const [formData, setFormData] = useState({
-    name:"",
-    email:"",
-    phone:"",
-    address:""
+    name: data.name,
+    email: data.email,
+    phone: data.phone,
+    address: data.address,
   })
   const { user } = useSelector((state) => state.auth)
   //const  data  = useSelector((state) => state.data)
@@ -46,14 +46,34 @@ export default function UpdateUser({ show, close, data}) {
     e.preventDefault()
     
     const updateUserData = {
-      name: data.name,
+      name: name,
       email: email,
       phone: phone,
       address: address,
       
     }
-    console.log(updateUserData);
-    dispatch(updateData(data._id,updateUserData))
+    // since we cannot send multiple arguments to createAsynThunk, we create a single object
+    const payload = {
+      id: data._id,
+      userListData: updateUserData,
+    };
+
+    //console.log(updateUserData);
+    //dispatch(updateData(payload));
+
+    try {
+      dispatch(updateData(payload));
+      console.log("Update successful. Closing modal...");
+      // After successful update, close the modal and fetch the latest data
+      close();
+      console.log("Fetching updated data...");
+      dispatch(getData());
+      console.log("Data fetched successfully.");
+
+    } catch (error) {
+      toast.error('Failed to update data.');
+      console.log("ERROR : ", error.message);
+    }
    
   }
   //console.log(id);
@@ -72,26 +92,26 @@ export default function UpdateUser({ show, close, data}) {
             <Modal.Body>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter Name" name="name" onChange={handleChange} defaultValue={data.name} />
+                <Form.Control type="text" placeholder="Enter Name" name="name" onChange={handleChange} value={name} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="Enter Email" name="email" onChange={handleChange} defaultValue={data.email} />
+            <Form.Control type="email" placeholder="Enter Email" name="email" onChange={handleChange} value={email} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Phone</Form.Label>
-            <Form.Control type="text" placeholder="Enter Phone Number" name="phone" onChange={handleChange} defaultValue={data.phone} />
+            <Form.Control type="text" placeholder="Enter Phone Number" name="phone" onChange={handleChange} value={phone} />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Address</Form.Label>
-            <Form.Control type="text" placeholder="Enter Address" name="address" defaultValue={data.address} onChange={handleChange} />
+            <Form.Control type="text" placeholder="Enter Address" name="address" value={address} onChange={handleChange} />
               </Form.Group>
             </Modal.Body>
 
             <Modal.Footer>
               <Button variant="secondary" onClick={close}>Close Modal</Button>
-              <Button variant="primary" type='submit'>Save changes</Button>
+          <Button variant="primary" type='submit'>Save changes</Button>
             </Modal.Footer>
         </Form>
           </Modal>  

@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { createData } from '../redux/features/data/dataSlice'
+import { createData, getData } from '../redux/features/data/dataSlice'
 import { toast } from 'react-toastify'
 
 
@@ -66,7 +66,8 @@ export default function AddUser() {
         }
     
         dispatch(createData(addUserData))
-        navigate('/')
+        //navigate('/')
+        dispatch(getData())
        
       }
     
