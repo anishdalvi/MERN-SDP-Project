@@ -9,6 +9,8 @@ import Table from 'react-bootstrap/Table';
 import Spinner from './Spinner'
 import '../App.css'
 import { getData, deleteData, reset, updateData } from '../redux/features/data/dataSlice'
+import UpdateUser from './UpdateUser';
+import { set } from 'mongoose';
 //import List from './List';
 
 export default function Home() {
@@ -50,30 +52,17 @@ export default function Home() {
 
   const showData = datas
 
+  const handleEdit = (e) => {
+    console.log("Clicked Edit");
+
+    modalShow()
+    //console.log(e.);
+    
+  }
+
   return (
     <div style={{textAlign:"center", marginTop:"100px"}}> <h1>Hello {user && (user.name)} </h1>
       <Container>
-                {/*  Modal Start */}
-                <Modal backdrop="static" show={show} onHide={modalClose} >
-                  <Modal.Header closeButton>
-                    <Modal.Title variant="secondary">
-                      <p style={{ color: "black" }}>
-                        Static Backdrop Modal
-                      </p>
-                    </Modal.Title>
-                  </Modal.Header>
-
-                  <Modal.Body style={{ color: "black" }}>
-                    <p>This Modal will not close when clicking outside it.</p>
-                  </Modal.Body>
-
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={modalClose}>Close Modal</Button>
-                    <Button variant="primary">Save changes</Button>
-                  </Modal.Footer>
-                </Modal>  
-                
-                {/*  Modal End */}
 
                 <Table striped bordered hover variant='light' >
                     <thead>
@@ -98,7 +87,15 @@ export default function Home() {
                              <td>{data.email}</td>
                              <td>{data.phone}</td>
                              <td>{data.address}</td>
-                              <td><button onClick={modalShow}>Edit</button></td>
+                              <td>
+                                <button type='button' onClick={handleEdit}>
+                                Edit
+                              </button>
+                                {show == true ? <UpdateUser show={show} close={modalClose} id={data._id} data={data} /> : ''}
+                                
+                              </td>
+                              
+                              
                               <td><button onClick={() => dispatch(deleteData(data._id)).then(() => navigate('/addUser'))}>Delete</button></td>
                             </tr>
                           ))}
