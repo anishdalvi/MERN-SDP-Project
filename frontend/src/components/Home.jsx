@@ -17,6 +17,7 @@ export default function Home() {
 
   const [show, setShow] = useState(false);
   const [currentData, setcurrentData] = useState();
+  const [deleted, setdeleted] = useState(false);
   const modalClose = () => setShow(false);
   const modalShow = () => setShow(true);  
 
@@ -43,7 +44,7 @@ export default function Home() {
       dispatch(reset())
     }
 
-  } , [user, navigate,message, isError ,dispatch, show] )
+  }, [user, navigate, message, isError, dispatch, show, deleted] )
 
   if (isLoading){
     return <Spinner />
@@ -99,7 +100,7 @@ export default function Home() {
                               </td>
                               
                               
-                              <td><button onClick={() => dispatch(deleteData(data._id)).then(() => navigate('/addUser'))}>Delete</button></td>
+                              <td><button onClick={() => dispatch(deleteData(data._id)).then(() => setdeleted(!deleted))}>Delete</button></td>
                             </tr>
                           ))}
                         </>

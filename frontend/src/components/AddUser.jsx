@@ -66,8 +66,8 @@ export default function AddUser() {
         }
     
         dispatch(createData(addUserData))
-        //navigate('/')
-        dispatch(getData())
+        //dispatch(getData())
+        navigate('/')
        
       }
     

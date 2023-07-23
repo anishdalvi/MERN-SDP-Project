@@ -63,12 +63,12 @@ export default function UpdateUser({ show, close, data}) {
 
     try {
       dispatch(updateData(payload));
-      console.log("Update successful. Closing modal...");
+      
       // After successful update, close the modal and fetch the latest data
       close();
-      console.log("Fetching updated data...");
+      
       dispatch(getData());
-      console.log("Data fetched successfully.");
+      
 
     } catch (error) {
       toast.error('Failed to update data.');
