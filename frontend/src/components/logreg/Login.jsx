@@ -62,6 +62,22 @@ export default function Login() {
 
   return (
     <Form className='logregForm' onSubmit={handleSubmit}>
+      <div style={{display: "flex", justifyContent:"center", gap: "50px", marginBottom: '20px'}}>
+        <h5 >
+          Demo Email
+          <h6 style={{ paddingTop: "10px" }}>
+            demo@demo.com
+
+          </h6>
+        </h5>
+        <h5 >
+          Demo Password
+          <h6 style={{ paddingTop: "10px" }}>
+            1234
+
+          </h6>
+        </h5>
+      </div>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter Email" name="email" onChange={handleChange} value={email} />

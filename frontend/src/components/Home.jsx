@@ -8,7 +8,8 @@ import { Modal, Button } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import Spinner from './Spinner'
 import '../App.css'
-import { getData, deleteData, reset, updateData } from '../redux/features/data/dataSlice'
+import { getData, deleteData, updateData } from '../redux/features/data/dataSlice'
+import { reset } from '../redux/features/auth/authSlice';
 import UpdateUser from './UpdateUser';
 import { set } from 'mongoose';
 //import List from './List';
@@ -32,15 +33,14 @@ export default function Home() {
       console.log("iserror dash  "+ message)
     }
 
-    if(!user){
+    if(user){
+      dispatch(getData())
+    } else {
       navigate('/login')
     }
-    else {
-      dispatch(getData())
-    }
-    
-
+   
     return () => {
+      //console.log("Resetting state from Home Component");
       dispatch(reset())
     }
 

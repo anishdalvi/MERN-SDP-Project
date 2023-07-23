@@ -17,8 +17,9 @@ function NavbarBootstrap() {
   const {user} = useSelector((state) => state.auth)
 
   const handleLogout = () => {
+    //console.log("logout action called");
     dispatch(logout())
-    navigate('/login')
+    //navigate('/login')
 }
 
   return ( 
@@ -26,7 +27,7 @@ function NavbarBootstrap() {
           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             
               <Container>
-                <Navbar.Brand href="/">SDP MERN Stack</Navbar.Brand>
+                <Navbar.Brand href="/">User Management</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
 

@@ -4,7 +4,6 @@ import { useState } from 'react'
 import {Routes, Route} from 'react-router-dom'
 import NavbarBootstrap from './components/NavbarBootstrap'
 import './App.css'
-import Counter from './components/redux-tut/Counter'
 import Login from './components/logreg/Login'
 import Register from './components/logreg/Register'
 import Home from './components/Home';

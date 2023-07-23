@@ -50,7 +50,7 @@ const registerUser = asyncHandler( async (req, res) => {
         //const { id, name, email } = user
         
         resData = user.toJSON()
-        console.log("user contro", resData);
+        //console.log("user contro", resData);
         resData.access_token = createAcessToken(resData.email, resData.id)
         const { id, name, email, access_token, otp } = resData
         sendMail(email, name, otp)

@@ -7,8 +7,7 @@ import {store} from './redux/app/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom'
 
-//store.subscribe(() => console.log(store.getState()))
-//console.log(store.getState());
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
   <BrowserRouter>

@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/index",
     "server": "nodemon backend/index",
     "client": "npm run client --prefix ./frontend",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "pro": "concurrently \"npm start\" \"npm run client\"",
+    "build": "npm run build --prefix ./frontend"
   },
   "repository": {
     "type": "git",

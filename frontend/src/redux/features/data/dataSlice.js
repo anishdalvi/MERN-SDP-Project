@@ -35,7 +35,8 @@ export const createData = createAsyncThunk('data/create', async (userListData, t
 
 // get user goals
 
-export const getData = createAsyncThunk('data/getAll', async(_, thunkAPI) => {
+export const getData = createAsyncThunk('data/getAll', async (_, thunkAPI) => {
+    console.log("getData async thunk called");
     try {
         if(thunkAPI.getState().auth.user){
             const token = thunkAPI.getState().auth.user.access_token
@@ -97,7 +98,10 @@ export const dataSlice = createSlice({
     name: 'data',
     initialState,
     reducers: {
-        reset: (state) => initialState,
+        reset: (state) => {
+            //console.log("Resetting state to initial value");
+            return initialState
+        },
         /* reset: (state) => {
             state.goals = [],
             state.isLoading = false
