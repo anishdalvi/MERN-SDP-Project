@@ -54,11 +54,15 @@ export const getData = createAsyncThunk('data/getAll', async(_, thunkAPI) => {
 
 // put update data
 
-export const updateData = createAsyncThunk('data/update', async(id, thunkAPI) => {
+export const updateData = createAsyncThunk('data/update', async(id, userListData, thunkAPI) => {
     try {
         if(thunkAPI.getState().auth.user){
             const token = thunkAPI.getState().auth.user.access_token
-            return await dataService.updateData(id,token)
+
+            console.log("dataSlice token: " + token);
+            console.log("dataSlice id: " + id);
+
+            return await dataService.updateData(id,userListData, token);
         }
         else{
             console.log("User Gone during update data")

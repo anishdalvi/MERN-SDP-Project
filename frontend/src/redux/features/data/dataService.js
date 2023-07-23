@@ -45,9 +45,13 @@ const updateData = async (dataId, userListData, token) => {
             Authorization: token
         }
     }
-
+    
+    console.log("Tokenn Before" , token);
     const response = await axios.put(API_URL + dataId, userListData, config)
     console.log("Update Data Service", response.data);
+    console.log(dataId);
+    console.log(userListData);
+    console.log("Tokenn " , token);
     return response.data
 }
 

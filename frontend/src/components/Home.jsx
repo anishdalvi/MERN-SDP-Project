@@ -16,6 +16,7 @@ import { set } from 'mongoose';
 export default function Home() {
 
   const [show, setShow] = useState(false);
+  const [currentData, setcurrentData] = useState();
   const modalClose = () => setShow(false);
   const modalShow = () => setShow(true);  
 
@@ -52,12 +53,14 @@ export default function Home() {
 
   const showData = datas
 
-  const handleEdit = (e) => {
-    console.log("Clicked Edit");
+  const handleEdit = (data) => {
+    //console.log("Clicked Edit");
 
     modalShow()
-    //console.log(e.);
-    
+    //console.log(data);
+    setcurrentData(data)
+
+    //return <UpdateUser show={true} close={modalClose} />
   }
 
   return (
@@ -88,10 +91,10 @@ export default function Home() {
                              <td>{data.phone}</td>
                              <td>{data.address}</td>
                               <td>
-                                <button type='button' onClick={handleEdit}>
+                                <button type='button' onClick={ () => handleEdit(data)}>
                                 Edit
                               </button>
-                                {show == true ? <UpdateUser show={show} close={modalClose} id={data._id} data={data} /> : ''}
+                                {show == true ? <UpdateUser show={show} close={modalClose} data={currentData} /> : ''}
                                 
                               </td>
                               
