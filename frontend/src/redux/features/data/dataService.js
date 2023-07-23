@@ -31,7 +31,7 @@ const getData = async (token) => {
     }
     //console.log("Get Data Service", config);
     const response = await axios.get(API_URL, config)
-    console.log("Get Data Service", response.data);
+    //console.log("Get Data Service", response.data);
 
     return response.data
 }

@@ -25,8 +25,10 @@ export default function Home() {
     if(!user){
       navigate('/login')
     }
+    else {
+      dispatch(getData())
+    }
     
-    dispatch(getData())
 
     return () => {
       dispatch(reset())
@@ -38,7 +40,7 @@ export default function Home() {
     return <Spinner />
   }
   //console.log("Here in Home : ", user);
-  console.log("Datas :", datas);
+  //console.log("Datas :", datas);
 
   const showData = datas
 
@@ -68,8 +70,8 @@ export default function Home() {
                              <td>{data.email}</td>
                              <td>{data.phone}</td>
                              <td>{data.address}</td>
-                             <td><button onClick={() => dispatch(updateData(data._id))}>Edit</button></td>
-                             <td><button onClick={() => dispatch(deleteData(data._id))}>Delete</button></td>
+                              <td><button onClick={() => navigate('/updateUser')}>Edit</button></td>
+                              <td><button onClick={() => dispatch(deleteData(data._id)).then(() => navigate('/addUser'))}>Delete</button></td>
                             </tr>
                           ))}
                         </>

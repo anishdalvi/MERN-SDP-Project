@@ -89,6 +89,8 @@ const deleteData = asyncHandler( async (req, res) => {
     const id = req.params.id
     const data = await Data.findById(id)
 
+    console.log("In Delete Data Service: " + data.user);
+
     if(!data){
         res.status(400).json({message: "Data Not Found"})
         throw new Error('Data not found backend')

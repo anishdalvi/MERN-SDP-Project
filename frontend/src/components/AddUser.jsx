@@ -27,7 +27,7 @@ export default function AddUser() {
       const { user } = useSelector((state) => state.auth)
 
       const userID = JSON.parse(localStorage.getItem('user'))
-      console.log("newww addUser: ",userID.id);
+      //console.log("newww addUser: ",userID.id);
 
       useEffect(() => {
         /* if(isError){
@@ -66,6 +66,7 @@ export default function AddUser() {
         }
     
         dispatch(createData(addUserData))
+        navigate('/')
        
       }
     

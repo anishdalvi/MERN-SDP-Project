@@ -16,7 +16,7 @@ const initialState = {
 export const createData = createAsyncThunk('data/create', async (userListData, thunkAPI) => {
     try {
         if(thunkAPI.getState().auth.user){
-            console.log("dataslice: ", userListData);
+            //console.log("dataslice: ", userListData);
             //console.log("Data Slice: ", thunkAPI.getState().auth.user.access_token);
             const token = thunkAPI.getState().auth.user.access_token
             //console.log("In Data Slice: Token is ", token);
