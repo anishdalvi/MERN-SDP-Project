@@ -54,12 +54,16 @@ export default function Home() {
     <div style={{textAlign:"center", marginTop:"100px"}}> <h1>Hello {user && (user.name)} </h1>
       <Container>
                 {/*  Modal Start */}
-                <Modal backdrop="static" show={show} onHide={modalClose}>
+                <Modal backdrop="static" show={show} onHide={modalClose} >
                   <Modal.Header closeButton>
-                    <Modal.Title>Static Backdrop Modal</Modal.Title>
+                    <Modal.Title variant="secondary">
+                      <p style={{ color: "black" }}>
+                        Static Backdrop Modal
+                      </p>
+                    </Modal.Title>
                   </Modal.Header>
 
-                  <Modal.Body>
+                  <Modal.Body style={{ color: "black" }}>
                     <p>This Modal will not close when clicking outside it.</p>
                   </Modal.Body>
 
